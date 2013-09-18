@@ -6,11 +6,15 @@ FIX_XMPDASH="s/xmp-/jpg /"
 
 # This is a map-reduce job that extracts one line from the Getty Open XMP XML
 # That is extracted by manta_image_convert.sh 
-# THe job uses grep -H to put the file name at the front of each line
+# Te mjob uses grep -H to put the file name at the front of each line
 # the -A4 makes grep emit 4 lines after the location of the <dc:description> tag
 # The unneeded lines are removed with head and tail 
 # then sed is used to remove the XML tag and change the filename back to the .jpg extension
 # so it refers to the original
+
+# The reduce phase collects the one-liners with cat and moves them into 
+# the compute job's /var/tmp directory, then sorts it and uses
+# mput to put the sorted file on Manta as an object
 
 mfind -t o /$MANTA_USER/public/images/getty-open/metadata_xmp -n 'xmp$' | \
 mjob create -w -m "grep -H --label=\`basename \$MANTA_INPUT_OBJECT\` -A4 '<dc:description>' | head -3 | tail -1 | \
