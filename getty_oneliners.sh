@@ -5,8 +5,8 @@ STRIP_XML="s/<[^>]*>//g"
 FIX_XMPDASH="s/xmp-/jpg /"
 
 # This is a map-reduce job that extracts one line from the Getty Open XMP XML
-# That is extracted by manta_image_convert.sh 
-# Te mjob uses grep -H to put the file name at the front of each line
+# as is extracted by manta_image_convert.sh 
+# The mjob uses grep -H to put the file name at the front of each line
 # the -A4 makes grep emit 4 lines after the location of the <dc:description> tag
 # The unneeded lines are removed with head and tail 
 # then sed is used to remove the XML tag and change the filename back to the .jpg extension
