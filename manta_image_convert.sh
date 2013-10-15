@@ -186,7 +186,7 @@ do
 	MPIPE_STR="mpipe /${MANTA_USER}/${USER_PATH}/${MP_SIZE}_${IMG_EXT}/\$(basename \${MANTA_INPUT_OBJECT%.*}).${IMG_EXT}" 
 	echo mpipe call is: ${MPIPE_STR}...
 # This uses the saved list of originals sitting on Manta as input without round-tripping back to the local machine.
-	echo /$MANTA_USER/$USER_PATH/$USER_ORIGINALS/input_list.txt | \
+	echo /${MANTA_USER}/${USER_PATH}/${USER_ORIGINALS}/input_list.txt | \
 	mjob create ${MJOB_ARGS} "xargs mcat" -m "${CONVERT_JOB} && ${MPIPE_STR} < ${PDIR_STR}"
 	date
 	echo "Summary: "
