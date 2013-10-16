@@ -25,7 +25,7 @@ fi
 
 
 
-MJOB_ARGS="-w -m"
+MJOB_ARGS="--memory 2048 -w -m"
 
 # Above - If you need to change the mjob command line parameters during the call to convert
 # e.g. MJOB_ARGS="--memory 2048 --disk 128 -w -m"
@@ -36,8 +36,8 @@ USER_PATH="public"
 
 # Above is the base directory after $MANTA_USER for the image originals and the target directories
 
-USER_ORIGINALS="art"
-#USER_ORIGINALS="originals"
+#USER_ORIGINALS="art"
+USER_ORIGINALS="originals"
 
 # Above is the subdirectory following USER_PATH where the originals are located
 
@@ -131,8 +131,8 @@ PDIR_STR=${PDIR_STR}${IMG_EXT}
 
 # Capture the list of original images for xargs use in each call to mjob:
 echo Preparing list of *.jpg originals...
-mjob create -w -r "mfind /$MANTA_USER/$USER_PATH/$USER_ORIGINALS -n 'jpg$' > /var/tmp/out.txt && \
-mput -f /var/tmp/out.txt /$MANTA_USER/$USER_PATH/$USER_ORIGINALS/input_list.txt" < /dev/null
+mjob create -w -r "mfind /${MANTA_USER}/${USER_PATH}/${USER_ORIGINALS} -n 'jpg$' > /var/tmp/out.txt && \
+mput -f /var/tmp/out.txt /${MANTA_USER}/${USER_PATH}/${USER_ORIGINALS}/input_list.txt" < /dev/null
 
 
 
